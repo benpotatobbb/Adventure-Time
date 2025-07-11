@@ -1,0 +1,115 @@
+Code Report: Adventure Time Simulation
+Overview
+The provided Python script (AhmedAmeen_2405045037_BasicProgrammingFinals_DGD1.py) implements a text-based simulation set in the Adventure Time universe. It features a robust OOP structure, a command-line interface, and a shop system, with support for random events, quests, and persistent logging. This report evaluates the code's structure, functionality, strengths, and areas for improvement.
+Code Structure
+The code is organized into several key components:
+
+Custom Exceptions:
+
+AdventureError: Base exception for general errors.
+CharacterNotFoundError: For invalid character names.
+InsufficientFundsError: For insufficient gold in shop purchases.
+These provide clear error handling and improve user experience.
+
+
+Character Classes:
+
+Base Character class with attributes (name, health, strength, gold, inventory) and methods (take_damage, add_item, spend_gold).
+Subclasses (Hero, Princess, Villain, Shopkeeper) implement polymorphism with unique methods (attack, heal, taunt, offer_deal).
+Inheritance is used effectively to share common functionality.
+
+
+GoosesShop Class:
+
+Manages a shop with items and their effects (e.g., increasing strength or health).
+Uses lambda functions for item effects, allowing flexible attribute modifications.
+Provides a display_items method and fun rhymes for immersion.
+
+
+AdventureSimulation Class:
+
+Orchestrates the game loop, character management, and command parsing.
+Includes methods for random events, quests, logging, and command validation.
+Uses case-insensitive lookups for characters and items.
+
+
+Functional Programming:
+
+Utilizes reduce for team strength calculation and map for applying random events.
+Employs random, datetime, json, re, collections, and itertools for various functionalities.
+
+
+
+Functionality
+
+Gameplay: Players interact via commands like attack, heal, buy, and quest. The system supports a variety of characters and actions, with clear feedback.
+Shop System: Items have distinct effects, and purchases are validated for sufficient funds.
+Event System: Random events add unpredictability, affecting all characters simultaneously.
+Logging: Events are saved to adventure_log.json and can be loaded, though loading is not fully integrated into gameplay.
+Command Parsing: Uses regex for robust, case-insensitive command validation, supporting multi-word names (e.g., "Princess Bubblegum").
+
+Strengths
+
+OOP Design: The use of inheritance and polymorphism is well-executed, making the code modular and extensible.
+Error Handling: Custom exceptions provide clear feedback for invalid actions, enhancing user experience.
+Immersive Elements: Character-specific abilities, shop rhymes, and quests reflect the Adventure Time theme, adding engagement.
+Flexibility: Case-insensitive name matching and regex-based command parsing handle complex inputs robustly.
+Persistence: JSON logging ensures game events are saved, though loading is underutilized.
+
+Areas for Improvement
+
+File I/O in Browser Context:
+The code uses file operations (open, json.dump, json.load) for logging, which is incompatible with browser-based environments like Pyodide. For browser compatibility, consider alternative storage (e.g., in-memory logs or localStorage).
+
+
+Log Loading Integration:
+The load_log method is implemented but not used in run_simulation. Integrating log loading on startup could enhance continuity.
+
+
+Event System Balance:
+Random events apply to all characters simultaneously, which may lead to unbalanced outcomes (e.g., all characters taking damage). Consider limiting events to specific characters or teams.
+
+
+Shop Effect Clarity:
+Some shop item effects (e.g., "Weird Gizmo") return strings that are appended to the output, which can be inconsistent. Standardizing effect outputs or separating side effects could improve clarity.
+
+
+Input Validation:
+While command parsing is robust, additional validation (e.g., preventing negative damage or ensuring unique character names) could prevent edge cases.
+
+
+Testing:
+The code lacks unit tests, which would help verify functionality for edge cases (e.g., zero health, empty inventory).
+
+
+
+Recommendations
+
+Browser Compatibility:
+Replace file I/O with in-memory storage or a browser-compatible alternative for Pyodide support.
+Example: Store logs in a list and provide a command to view them.
+
+
+Enhanced Logging:
+Load the log on startup and display past events or allow players to resume quests.
+
+
+Balanced Events:
+Introduce event filters (e.g., only affect Hero characters) or allow players to choose event targets.
+
+
+Shop Effect Standardization:
+Refactor item effects to return consistent results (e.g., None for no message) and handle output in buy_item.
+
+
+Unit Tests:
+Add tests for character actions, shop purchases, and event outcomes using a framework like unittest.
+
+
+Game Progression:
+Add a quest completion mechanism or a win/lose condition to give the simulation a clear goal.
+
+
+
+Conclusion
+The Adventure Time Simulation is a well-structured, engaging project that effectively uses OOP and Python's standard libraries to create an interactive game. Its strengths lie in its thematic immersion, robust error handling, and modular design. Addressing file I/O compatibility, enhancing log integration, and balancing gameplay mechanics would further improve its functionality and user experience.
